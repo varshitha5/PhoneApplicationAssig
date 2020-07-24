@@ -11,13 +11,7 @@
     <h4>Person</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.City.CityName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.City.CityName)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Country.CountryName)
@@ -33,6 +27,13 @@
 
         <dd>
             @Html.DisplayFor(model => model.State.StateName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City.CityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City.CityName)
         </dd>
 
         <dt>
@@ -92,7 +93,7 @@
         </dd>
 
 
-       
+
 
     </dl>
 

@@ -46,15 +46,24 @@ namespace PhoneApplicationAssig.Controllers
             }
             return View(person);
         }
-
-        // GET: Person/Create
         public ActionResult Create()
         {
-            ViewBag.CityId = new SelectList(db.Cities, "CityId", "CityName");
-            ViewBag.CountryId = new SelectList(db.Countries, "ContryId", "CountryName");
-            ViewBag.StateId = new SelectList(db.States, "SateId", "StateName");
+            var country = db.Countries.Where(c => c.IsActive).ToList();
+            List<SelectListItem> co = new List<SelectListItem>();
+            foreach (var c in country)
+            {
+                co.Add(new SelectListItem
+                {
+                    Text = c.CountryName,
+                    Value = c.ContryId.ToString()
+                });
+                ViewBag.country = co;
+            }
             return View();
         }
+
+        // GET: Person/Create
+        
 
         // POST: Person/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -75,9 +84,41 @@ namespace PhoneApplicationAssig.Controllers
             ViewBag.StateId = new SelectList(db.States, "SateId", "StateName", person.StateId);
             return View(person);
         }
+        public JsonResult GetStates(int id)
+        {
+            var states = db.States.Where(s => s.CountryId == id && s.IsActive).ToList();
+            List<SelectListItem> listates = new List<SelectListItem>();
+            listates.Add(new SelectListItem { Text = "--Select State--", Value = "0" });
+            if (states != null)
+            {
+                foreach (var s in states)
+                {
+                    listates.Add(new SelectListItem { Text = s.StateName, Value = s.SateId.ToString() });
+                }
+            }
+            return Json(new SelectList(listates, "Value", "Text", JsonRequestBehavior.AllowGet));
+        }
+        public JsonResult GetCities(int id)
 
-        // GET: Person/Edit/5
-        public ActionResult Edit(int? id)
+        {
+            var cities = db.Cities.Where(c => c.StateId == id && c.IsActive).ToList();
+            List<SelectListItem> licity = new List<SelectListItem>();
+            licity.Add(new SelectListItem { Text = "--Select City--", Value = "0" });
+            if (cities != null)
+            {
+                foreach (var c in cities)
+                {
+                    licity.Add(new SelectListItem { Text = c.CityName, Value = c.CityId.ToString() });
+                }
+
+            }
+
+            return Json(new SelectList(licity, "Value", "Text", JsonRequestBehavior.AllowGet));
+        }
+  
+
+// GET: Person/Edit/5
+public ActionResult Edit(int? id)
         {
             if (id == null)
             {
