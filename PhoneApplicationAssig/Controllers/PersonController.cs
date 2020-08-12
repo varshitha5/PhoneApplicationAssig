@@ -15,7 +15,7 @@ namespace PhoneApplicationAssig.Controllers
     {
         private ApplicationContext db = new ApplicationContext();
 
-        // GET: Person
+        //GET: Person
         public ActionResult Index(String searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
@@ -31,6 +31,7 @@ namespace PhoneApplicationAssig.Controllers
             peoples = peoples.Where(p => p.IsActive.Equals(true));
             return View(peoples.ToList());
         }
+
 
         // GET: Person/Details/5
         public ActionResult Details(int? id)

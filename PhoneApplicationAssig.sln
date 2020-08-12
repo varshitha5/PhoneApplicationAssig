@@ -5,6 +5,12 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneApplicationAssig", "PhoneApplicationAssig\PhoneApplicationAssig.csproj", "{FE054443-AE3E-4B77-A2F5-68743BC3D439}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBookAppWebApi", "PhoneBookAppWebApi\PhoneBookAppWebApi.csproj", "{48081A1C-FB71-4E0A-A0C6-393A40162CB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBookApp.DAL", "PhoneBookApp.DAL\PhoneBookApp.DAL.csproj", "{9EA8AC2C-00D5-4155-90DF-A9E44796B44D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhoneBookApp.Service", "PhoneBookApp.Service\PhoneBookApp.Service.csproj", "{52A2CB4B-4428-4D0F-BB7D-17C838787B98}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{FE054443-AE3E-4B77-A2F5-68743BC3D439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE054443-AE3E-4B77-A2F5-68743BC3D439}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE054443-AE3E-4B77-A2F5-68743BC3D439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48081A1C-FB71-4E0A-A0C6-393A40162CB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48081A1C-FB71-4E0A-A0C6-393A40162CB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48081A1C-FB71-4E0A-A0C6-393A40162CB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48081A1C-FB71-4E0A-A0C6-393A40162CB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EA8AC2C-00D5-4155-90DF-A9E44796B44D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EA8AC2C-00D5-4155-90DF-A9E44796B44D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EA8AC2C-00D5-4155-90DF-A9E44796B44D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EA8AC2C-00D5-4155-90DF-A9E44796B44D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52A2CB4B-4428-4D0F-BB7D-17C838787B98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52A2CB4B-4428-4D0F-BB7D-17C838787B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52A2CB4B-4428-4D0F-BB7D-17C838787B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52A2CB4B-4428-4D0F-BB7D-17C838787B98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

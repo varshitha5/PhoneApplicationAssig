@@ -13,7 +13,7 @@
 {
     <p>
         @Html.TextBox("SearchString"):
-        <input type="submit" value="Search" />
+        <input type="button" value="Search" />
     </p>
 }
 <table class="table">
@@ -38,7 +38,7 @@
             @Html.DisplayNameFor(model => model.AddressTwo)
         </th>
 
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Country.CountryName)
         </th>
         <th>
@@ -46,7 +46,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.City.CityName)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.PinCode)
         </th>
@@ -57,48 +57,118 @@
 
     @foreach (var item in Model)
     {
-<tr>
+        <tr>
 
-    <td>
-        @Html.DisplayFor(modelItem => item.FirstName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.LastName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.EmailId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PhoneNumber)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.AddressOne)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.AddressTwo)
-    </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressOne)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressTwo)
+            </td>
 
-    <td>
-        @Html.DisplayFor(modelItem => item.Country.CountryName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.State.StateName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.City.CityName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.PinCode)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.IsActive)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-    </td>
-</tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Country.CountryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State.StateName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.CityName)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.PinCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
     }
 
 </table>
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        People Using WebApi
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered" id="Table">
+            <tr>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>PhoneNumber</th>
+                <th>EmailId</th>
+                <th>AddressOne</th>
+                <th>AddressTwo</th>
+                <th>PinCode</th>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#SearchBtn").click(function () {
+            var searchBy = $("#SearchBy").val();
+            var searchValue = $("#SearchString").val();
+            var url = "https://localhost:44314/api/Person";
+            var query = "$filter=substringof('" + searchValue + "',FirstName)";
+            url += "?" + query;
+            $("#Tableone").find(HTMLTableRowElement).remove();
+            $.ajax({
+                cache: false,
+                type: "Get",
+                url: url,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                headers:
+                {
+                    Authorization: 'Basic ' + btoa("Admin" + ':' + "admin")
+                },
+                success: function (data) {
+                    $("#DIV").html('');
+                    var DIV = '';
+                    $('#Table').empty();
+                    $.each(data.value, function (i, item) {
+                        var rows = "<tr>" +
+                            "<td id='FirstName'>" + item.FirstName + "</td>" +
+                            "<td id='LastName'>" + item.LastName + "</td>" +
+                            "<td id='PhoneNumber'>" + item.PhoneNumber + "</td>" +
+                            "<td id='EmailId'>" + item.EmailId + "</td>" +
+                            "<td id='AddressOne'>" + item.AddressOne + "</td>" +
+                            "<td id='AddressTwo'>" + item.AddressTwo + "</td>" +
+                            "<td id='PinCode'>" + item.PinCode + "</td>" +
+                            "</tr>";
+                        $('#Table').append(rows);
+                    });
+                },
+                failure: function (data) {
+                    //alert(data.responseText);
+                    alert("Data Not Found");
+                },
+                error: function (data) {
+                    //alert(data.responseText);
+                    alert("Data Not Found");
+                }
+            });
+        });
+    });
+</script>

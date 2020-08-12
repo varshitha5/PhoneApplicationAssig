@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using PhoneApplicationAssig.DAL;
@@ -14,12 +16,24 @@ namespace PhoneApplicationAssig.Controllers
     public class CountriesController : Controller
     {
         private ApplicationContext db = new ApplicationContext();
-
+        static readonly HttpClient client = new HttpClient();
         // GET: Countries
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var countries = db.Countries.Where(c => c.IsActive.Equals(true));
-            return View(countries.ToList());
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("https://localhost:44308/api/Countries/");
+                response.EnsureSuccessStatusCode();
+                string responseBody = await response.Content.ReadAsStringAsync();
+                return View(responseBody);
+            }
+            catch(HttpRequestException e)
+            {
+                ViewBag.Error = e.Message;
+                return View("Error");
+            }
+           // var countries = db.Countries.Where(c => c.IsActive.Equals(true));
+            //return View(countries.ToList());
         }
 
         // GET: Countries/Details/5
